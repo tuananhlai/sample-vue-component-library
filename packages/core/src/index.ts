@@ -2,4 +2,4 @@
 // be bundled with the component's CSS.
 import "./styles/tokens.css";
 
-export { Button } from "./components/button";
+export * from "./components/button";
