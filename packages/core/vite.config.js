@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+import pkg from "./package.json";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -24,9 +25,11 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "SampleDesignSystem",
       fileName: "index",
+      cssFileName: "style",
     },
     rollupOptions: {
-      external: ["vue"],
+      // https://github.com/vitejs/vite/discussions/6198#discussioncomment-8320599
+      external: ["vue", ...Object.keys(pkg.dependencies)],
       output: {
         globals: {
           vue: "Vue",
