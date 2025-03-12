@@ -22,7 +22,8 @@
   "scripts": {
     "build": "vite build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "ci:test": "vitest run --coverage"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
@@ -33,6 +34,7 @@
     "@storybook/test": "^8.6.4",
     "@storybook/vue3": "^8.6.4",
     "@storybook/vue3-vite": "^8.6.4",
+    "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitest/browser": "^3.0.8",
     "@vitest/coverage-v8": "^3.0.8",

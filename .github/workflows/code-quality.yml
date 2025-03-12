@@ -1,0 +1,22 @@
+name: "Verify code quality"
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    permissions:
+      pull-requests: write
+      checks: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+      - name: Run tests
+        run: pnpm --filter @tuananhlai/sample-design-system run ci:test
