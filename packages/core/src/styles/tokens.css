@@ -32,15 +32,15 @@
   --bw-line-9: 2.25rem;
   --bw-line-10: 2.5rem;
 
-  --bw-shadow-sm:
-    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --bw-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1);
   --bw-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --bw-shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
-  --bw-shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --bw-shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --bw-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  --bw-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --bw-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --bw-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   --bw-shadow-none: none;
 
@@ -92,6 +92,30 @@
   --bw-color-zinc-900: rgb(24, 24, 27);
   --bw-color-zinc-950: rgb(9, 9, 11);
 
+  --bw-color-fuchsia-50: rgb(253, 244, 255);
+  --bw-color-fuchsia-100: rgb(250, 232, 255);
+  --bw-color-fuchsia-200: rgb(245, 208, 254);
+  --bw-color-fuchsia-300: rgb(240, 171, 252);
+  --bw-color-fuchsia-400: rgb(232, 121, 249);
+  --bw-color-fuchsia-500: rgb(217, 70, 239);
+  --bw-color-fuchsia-600: rgb(192, 38, 211);
+  --bw-color-fuchsia-700: rgb(162, 28, 175);
+  --bw-color-fuchsia-800: rgb(134, 25, 143);
+  --bw-color-fuchsia-900: rgb(112, 26, 117);
+  --bw-color-fuchsia-950: rgb(74, 4, 78);
+
+  --bw-color-pink-50: rgb(253, 242, 248);
+  --bw-color-pink-100: rgb(252, 231, 243);
+  --bw-color-pink-200: rgb(251, 207, 232);
+  --bw-color-pink-300: rgb(249, 168, 212);
+  --bw-color-pink-400: rgb(244, 114, 182);
+  --bw-color-pink-500: rgb(236, 72, 153);
+  --bw-color-pink-600: rgb(219, 39, 119);
+  --bw-color-pink-700: rgb(190, 24, 93);
+  --bw-color-pink-800: rgb(157, 23, 77);
+  --bw-color-pink-900: rgb(131, 24, 67);
+  --bw-color-pink-950: rgb(80, 7, 36);
+
   --bw-timing-easein: cubic-bezier(0, 0, 0.2, 1);
   --bw-timing-easeout: cubic-bezier(0.4, 0, 1, 1);
 
@@ -134,4 +158,26 @@
   --bw-space-72: 18rem;
   --bw-space-80: 20rem;
   --bw-space-96: 24rem;
+}
+
+:root {
+  --bw-color-primary: var(--bw-color-blue-500);
+
+  --bw-button-primary-background-color: var(--bw-color-primary);
+  --bw-button-primary-color: var(--bw-color-white);
+  --bw-button-secondary-background-color: var(--bw-color-zinc-200);
+  --bw-button-secondary-color: var(--bw-color-zinc-800);
+  --bw-button-tertiary-background-color: transparent;
+  --bw-button-tertiary-color: var(--bw-color-primary);
+}
+
+:root[data-theme="pink"] {
+  --bw-color-primary: var(--bw-color-fuchsia-500);
+
+  --bw-button-primary-background-color: var(--bw-color-primary);
+  --bw-button-primary-color: var(--bw-color-white);
+  --bw-button-secondary-background-color: var(--bw-color-fuchsia-200);
+  --bw-button-secondary-color: var(--bw-color-fuchsia-800);
+  --bw-button-tertiary-background-color: transparent;
+  --bw-button-tertiary-color: var(--bw-color-primary);
 }

@@ -1,0 +1,51 @@
+@use "sass:string";
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+@mixin screen-sm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin screen-md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin screen-lg {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin screen-xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin screen-2xl {
+  @media (min-width: $breakpoint-2xl) {
+    @content;
+  }
+}
+
+@function alpha($color, $alphaValue) {
+  @return string.unquote(
+    "color-mix(in srgb, #{$color} #{$alphaValue}%, transparent)"
+  );
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

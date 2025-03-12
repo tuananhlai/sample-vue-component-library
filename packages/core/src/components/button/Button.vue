@@ -29,18 +29,18 @@ withDefaults(defineProps<ButtonProps>(), {
   box-shadow: var(--bw-shadow-sm);
 
   &:where([data-variant="primary"]) {
-    background: var(--bw-color-blue-600);
-    color: var(--bw-color-white);
+    background: var(--bw-button-primary-background-color);
+    color: var(--bw-button-primary-color);
   }
 
   &:where([data-variant="secondary"]) {
-    background: var(--bw-color-zinc-200);
-    color: var(--bw-color-zinc-800);
+    background: var(--bw-button-secondary-background-color);
+    color: var(--bw-button-secondary-color);
   }
 
   &:where([data-variant="tertiary"]) {
-    background: transparent;
-    color: var(--bw-color-blue-600);
+    background: var(--bw-button-tertiary-background-color);
+    color: var(--bw-button-tertiary-color);
     box-shadow: none;
   }
 }
