@@ -12,7 +12,7 @@ withDefaults(defineProps<ButtonProps>(), {
 </script>
 
 <template>
-  <button :class="$style.root">
+  <button :class="$style.root" :data-variant="variant">
     <slot />
   </button>
 </template>
