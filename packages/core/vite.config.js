@@ -7,9 +7,17 @@ import dts from "vite-plugin-dts";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [vue(), dts()],
+  plugins: [
+    vue(),
+    dts({
+      compilerOptions: {
+        declarationMap: true,
+      },
+    }),
+  ],
   build: {
     minify: false,
+    sourcemap: true,
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "SampleDesignSystem",
