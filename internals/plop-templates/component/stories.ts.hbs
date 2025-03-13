@@ -1,0 +1,23 @@
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { {{componentName}} } from '../src';
+
+const meta = {
+  title: '{{componentName}}',
+  component: {{componentName}},
+} satisfies Meta<typeof {{componentName}}>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
+};
+
+export const VisualTest: Story = {
+  render: () => ({
+    components: { {{componentName}} },
+    template: `<div>
+
+    </div>`,
+  })
+}

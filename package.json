@@ -3,12 +3,14 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "release": "pnpm --filter @tuananhlai/sample-design-system run build && changeset publish"
+    "release": "pnpm --filter @tuananhlai/sample-design-system run build && changeset publish",
+    "generate": "plop"
   },
   "keywords": [],
   "author": "Andy",
   "license": "ISC",
   "devDependencies": {
-    "@changesets/cli": "^2.28.1"
+    "@changesets/cli": "^2.28.1",
+    "plop": "^4.0.1"
   }
 }
