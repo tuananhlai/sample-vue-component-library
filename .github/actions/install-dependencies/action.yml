@@ -16,6 +16,15 @@ runs:
         node-version: 22
         cache: "pnpm"
 
+    # Set up .npmrc to fetch packages published on GitHub Packages.
+    - name: Creating .npmrc
+      run: |
+        cat << EOF > "$HOME/.npmrc"
+          //registry.npmjs.org/:_authToken=$NPM_TOKEN
+        EOF
+      env:
+        NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile
