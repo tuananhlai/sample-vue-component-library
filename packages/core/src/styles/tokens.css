@@ -165,10 +165,13 @@
 
   --bw-button-primary-background-color: var(--bw-color-primary);
   --bw-button-primary-color: var(--bw-color-white);
-  --bw-button-secondary-background-color: var(--bw-color-zinc-200);
-  --bw-button-secondary-color: var(--bw-color-zinc-800);
+  --bw-button-primary-hover-background-color: var(--bw-color-pink-600);
+  --bw-button-secondary-background-color: var(--bw-color-pink-200);
+  --bw-button-secondary-color: var(--bw-color-pink-600);
+  --bw-button-secondary-hover-background-color: var(--bw-color-pink-300);
   --bw-button-tertiary-background-color: transparent;
   --bw-button-tertiary-color: var(--bw-color-primary);
+  --bw-button-tertiary-hover-background-color: var(--bw-color-pink-100);
 }
 
 :root[data-theme="fuchsia"] {
@@ -176,8 +179,11 @@
 
   --bw-button-primary-background-color: var(--bw-color-primary);
   --bw-button-primary-color: var(--bw-color-white);
+  --bw-button-primary-hover-background-color: var(--bw-color-fuchsia-600);
   --bw-button-secondary-background-color: var(--bw-color-fuchsia-200);
   --bw-button-secondary-color: var(--bw-color-fuchsia-800);
+  --bw-button-secondary-hover-background-color: var(--bw-color-fuchsia-300);
   --bw-button-tertiary-background-color: transparent;
   --bw-button-tertiary-color: var(--bw-color-primary);
+  --bw-button-tertiary-hover-background-color: var(--bw-color-fuchsia-100);
 }
