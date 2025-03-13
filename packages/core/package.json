@@ -24,7 +24,7 @@
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "ci:test": "vitest run --coverage"
+    "ci:test": "vitest"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
@@ -38,6 +38,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "^5.2.1",
+    "jsdom": "^26.0.0",
     "sass": "^1.85.1",
     "storybook": "^8.6.4",
     "vite": "^6.2.1",
