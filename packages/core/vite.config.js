@@ -14,6 +14,8 @@ export default defineConfig({
       compilerOptions: {
         declarationMap: true,
       },
+      // Only compile files from src directory
+      include: ["./src/**/*"],
     }),
   ],
   build: {
@@ -21,6 +23,7 @@ export default defineConfig({
     // read the original source code more easily.
     minify: false,
     sourcemap: true,
+    outDir: resolve(__dirname, "dist"),
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "SampleDesignSystem",

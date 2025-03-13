@@ -9,8 +9,8 @@ export interface CheckboxEmits {
 </script>
 
 <script setup lang="ts">
-import { CheckboxRoot } from "reka-ui";
 import { useVModel } from "@vueuse/core";
+import { CheckboxRoot } from "reka-ui";
 
 const props = defineProps<CheckboxProps>();
 const emits = defineEmits<CheckboxEmits>();
