@@ -12,31 +12,6 @@ importers:
         specifier: ^2.28.1
         version: 2.28.1
 
-  examples/dogfood:
-    dependencies:
-      '@tuananhlai/sample-design-system':
-        specifier: ^0.0.3
-        version: 0.0.3(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
-      vue:
-        specifier: ^3.5.13
-        version: 3.5.13(typescript@5.7.3)
-    devDependencies:
-      '@vitejs/plugin-vue':
-        specifier: ^5.2.1
-        version: 5.2.1(vite@6.2.1(sass@1.85.1))(vue@3.5.13(typescript@5.7.3))
-      '@vue/tsconfig':
-        specifier: ^0.7.0
-        version: 0.7.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
-      typescript:
-        specifier: ~5.7.2
-        version: 5.7.3
-      vite:
-        specifier: ^6.2.0
-        version: 6.2.1(sass@1.85.1)
-      vue-tsc:
-        specifier: ^2.2.4
-        version: 2.2.8(typescript@5.7.3)
-
   packages/core:
     dependencies:
       '@vueuse/core':
@@ -845,11 +820,6 @@ packages:
       '@vue/compiler-sfc':
         optional: true
 
-  '@tuananhlai/sample-design-system@0.0.3':
-    resolution: {integrity: sha512-Jzo087fnpMTSOe0fO+er9oQFL3iTu96LsH5ARxQrXqBTRFq/5rUDm54uIumjic64HvYrrg4Ap6H0kAx12P7wHg==, tarball: https://npm.pkg.github.com/download/@tuananhlai/sample-design-system/0.0.3/f5b4db41d9f49f29607ce206250471c1dfad48d9}
-    peerDependencies:
-      vue: ^3.5.13
-
   '@types/argparse@1.0.38':
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
 
@@ -987,17 +957,6 @@ packages:
 
   '@vue/test-utils@2.4.6':
     resolution: {integrity: sha512-FMxEjOpYNYiFe0GkaHsnJPXFHxQ6m4t8vI/ElPGpMWxZKpmRvQ33OIrvRXemy6yha03RxhOlQuy+gZMC3CQSow==}
-
-  '@vue/tsconfig@0.7.0':
-    resolution: {integrity: sha512-ku2uNz5MaZ9IerPPUyOHzyjhXoX2kVJaVf7hL315DC17vS6IiZRmmCPfggNbU16QTvM80+uYYy3eYJB59WCtvg==}
-    peerDependencies:
-      typescript: 5.x
-      vue: ^3.4.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-      vue:
-        optional: true
 
   '@vueuse/core@12.8.2':
     resolution: {integrity: sha512-HbvCmZdzAu3VGi/pWYm5Ut+Kd9mn1ZHnn4L5G8kOQTPs/IwIAmJoBrmYk2ckLArgMXZj0AW3n5CAejLUO+PhdQ==}
@@ -2516,12 +2475,6 @@ packages:
     peerDependencies:
       vue: '>=2'
 
-  vue-tsc@2.2.8:
-    resolution: {integrity: sha512-jBYKBNFADTN+L+MdesNX/TB3XuDSyaWynKMDgR+yCSln0GQ9Tfb7JS2lr46s2LiFUT1WsmfWsSvIElyxzOPqcQ==}
-    hasBin: true
-    peerDependencies:
-      typescript: '>=5.0.0'
-
   vue@3.5.13:
     resolution: {integrity: sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==}
     peerDependencies:
@@ -3437,15 +3390,6 @@ snapshots:
     optionalDependencies:
       '@vue/compiler-sfc': 3.5.13
 
-  '@tuananhlai/sample-design-system@0.0.3(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))':
-    dependencies:
-      '@vueuse/core': 13.0.0(vue@3.5.13(typescript@5.7.3))
-      reka-ui: 2.0.2(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
-      vue: 3.5.13(typescript@5.7.3)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - typescript
-
   '@types/argparse@1.0.38': {}
 
   '@types/aria-query@5.0.4': {}
@@ -3642,11 +3586,6 @@ snapshots:
     dependencies:
       js-beautify: 1.15.4
       vue-component-type-helpers: 2.2.8
-
-  '@vue/tsconfig@0.7.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))':
-    optionalDependencies:
-      typescript: 5.7.3
-      vue: 3.5.13(typescript@5.7.3)
 
   '@vueuse/core@12.8.2(typescript@5.7.3)':
     dependencies:
@@ -5202,12 +5141,6 @@ snapshots:
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.5.13(typescript@5.7.3)):
     dependencies:
       vue: 3.5.13(typescript@5.7.3)
-
-  vue-tsc@2.2.8(typescript@5.7.3):
-    dependencies:
-      '@volar/typescript': 2.4.12
-      '@vue/language-core': 2.2.8(typescript@5.7.3)
-      typescript: 5.7.3
 
   vue@3.5.13(typescript@5.7.3):
     dependencies:
