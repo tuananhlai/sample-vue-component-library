@@ -32,12 +32,10 @@ export default defineConfig({
     },
     rollupOptions: {
       // https://github.com/vitejs/vite/discussions/6198#discussioncomment-8320599
-      external: ["vue", ...Object.keys(pkg.dependencies)],
-      output: {
-        globals: {
-          vue: "Vue",
-        },
-      },
+      external: [
+        ...Object.keys(pkg.dependencies),
+        ...Object.keys(pkg.peerDependencies),
+      ],
     },
   },
 });

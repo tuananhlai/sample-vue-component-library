@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^13.0.0",
+    "lucide-vue-next": "^0.479.0",
     "reka-ui": "^2.0.2"
   },
   "publishConfig": {
