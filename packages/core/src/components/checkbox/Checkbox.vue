@@ -55,13 +55,17 @@ const forwardedPropEmits = useForwardPropsEmits(props, emits);
   align-items: center;
   justify-content: center;
   appearance: none;
-  background-color: var(--bw-color-white);
+  background-color: var(--bw-checkbox-background-color);
   border: 1px solid var(--bw-color-zinc-300);
   border-radius: var(--bw-space-1);
-  box-shadow: var(--bw-shadow-sm);
+  padding: 0;
 
   &:where(:hover) {
     background-color: var(--bw-color-zinc-50);
+  }
+
+  &:where([data-state="checked"]) {
+    background-color: var(--bw-checkbox-checked-background-color);
   }
 }
 
@@ -74,5 +78,7 @@ const forwardedPropEmits = useForwardPropsEmits(props, emits);
 .checkedIcon {
   width: var(--bw-space-4);
   height: var(--bw-space-4);
+  stroke-width: 4px;
+  color: var(--bw-color-white);
 }
 </style>

@@ -172,6 +172,9 @@
   --bw-button-tertiary-background-color: transparent;
   --bw-button-tertiary-color: var(--bw-color-primary);
   --bw-button-tertiary-hover-background-color: var(--bw-color-pink-100);
+
+  --bw-checkbox-background-color: var(--bw-color-white);
+  --bw-checkbox-checked-background-color: var(--bw-color-primary);
 }
 
 :root[data-theme="fuchsia"] {
@@ -186,4 +189,7 @@
   --bw-button-tertiary-background-color: transparent;
   --bw-button-tertiary-color: var(--bw-color-primary);
   --bw-button-tertiary-hover-background-color: var(--bw-color-fuchsia-100);
+
+  --bw-checkbox-background-color: var(--bw-color-white);
+  --bw-checkbox-checked-background-color: var(--bw-color-primary);
 }
