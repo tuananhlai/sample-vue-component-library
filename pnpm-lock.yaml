@@ -14,6 +14,9 @@ importers:
       plop:
         specifier: ^4.0.1
         version: 4.0.1
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
 
   packages/core:
     dependencies:

@@ -11,6 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
-    "plop": "^4.0.1"
+    "plop": "^4.0.1",
+    "typescript": "^5.8.2"
   }
 }
