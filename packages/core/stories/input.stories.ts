@@ -23,7 +23,7 @@ export const VisualTest: Story = {
       const inputRef = useTemplateRef<InputExpose>("inputRef");
 
       const focus = () => {
-        inputRef.value?.getDOMNode()?.focus();
+        inputRef.value?.$el?.focus();
       };
 
       return {
