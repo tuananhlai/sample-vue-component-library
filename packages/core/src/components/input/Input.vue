@@ -21,7 +21,7 @@ export interface InputProps {
   maxlength?: number;
   pattern?: string;
   spellcheck?: boolean;
-  enterkeyhint?: InputHTMLAttributes["enterKeyHint"];
+  enterKeyHint?: InputHTMLAttributes["enterKeyHint"];
   inputmode?: HTMLAttributes["inputmode"];
 }
 
@@ -75,7 +75,7 @@ const { forwardRef } = useForwardExpose();
       :maxlength="maxlength"
       :pattern="pattern"
       :spellcheck="spellcheck"
-      :enterkeyhint="enterkeyhint"
+      :enter-key-hint="enterKeyHint"
       :inputmode="inputmode"
       @input="onInput"
       @blur="(e) => emits('blur', e)"
