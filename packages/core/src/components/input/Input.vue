@@ -21,23 +21,8 @@ export interface InputProps {
   maxlength?: number;
   pattern?: string;
   spellcheck?: boolean;
-  enterkeyhint?:
-    | "enter"
-    | "done"
-    | "go"
-    | "next"
-    | "previous"
-    | "search"
-    | "send";
-  inputmode?:
-    | "none"
-    | "text"
-    | "tel"
-    | "url"
-    | "email"
-    | "numeric"
-    | "decimal"
-    | "search";
+  enterKeyHint?: InputHTMLAttributes["enterKeyHint"];
+  inputmode?: HTMLAttributes["inputmode"];
 }
 
 export interface InputEmits {
@@ -50,9 +35,15 @@ export interface InputEmits {
   keyup: [event: KeyboardEvent];
   keypress: [event: KeyboardEvent];
 }
+
+export interface InputExpose {
+  /** Get the underlying DOM element. */
+  getDOMNode: () => HTMLInputElement | null;
+}
 </script>
 
 <script setup lang="ts">
+import { HTMLAttributes, InputHTMLAttributes, useTemplateRef } from "vue";
 
 defineProps<InputProps>();
 
@@ -62,11 +53,18 @@ const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
   emits("update:modelValue", target.value);
 };
+
+const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
+
+defineExpose<InputExpose>({
+  getDOMNode: () => inputRef.value,
+});
 </script>
 
 <template>
   <div :class="$style.root">
     <input
+      ref="inputRef"
       :invalid="invalid"
       :class="$style.input"
       :type="type"
@@ -81,7 +79,7 @@ const onInput = (event: Event) => {
       :maxlength="maxlength"
       :pattern="pattern"
       :spellcheck="spellcheck"
-      :enterkeyhint="enterkeyhint"
+      :enter-key-hint="enterKeyHint"
       :inputmode="inputmode"
       @input="onInput"
       @blur="(e) => emits('blur', e)"

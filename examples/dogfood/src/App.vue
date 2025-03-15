@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { Button } from "@tuananhlai/sample-design-system";
+import { Button, Checkbox, Input } from "@tuananhlai/sample-design-system";
+import { ref } from "vue";
+
+const isChecked = ref(false);
 </script>
 
 <template>
@@ -7,6 +10,8 @@ import { Button } from "@tuananhlai/sample-design-system";
     <Button>Click me</Button>
     <Button variant="secondary">Click me</Button>
     <Button variant="tertiary">Click me</Button>
+    <Checkbox v-model="isChecked">Check me</Checkbox>
+    <Input placeholder="Enter your name" />
   </div>
 </template>
 
