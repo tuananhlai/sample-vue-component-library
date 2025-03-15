@@ -37,13 +37,13 @@ export interface InputEmits {
 }
 
 export interface InputExpose {
-  $el: HTMLInputElement | null;
+  /** Get the underlying DOM element. */
+  getDOMNode: () => HTMLInputElement | null;
 }
 </script>
 
 <script setup lang="ts">
-import { useForwardExpose } from "reka-ui";
-import { HTMLAttributes, InputHTMLAttributes } from "vue";
+import { HTMLAttributes, InputHTMLAttributes, useTemplateRef } from "vue";
 
 defineProps<InputProps>();
 
@@ -54,13 +54,17 @@ const onInput = (event: Event) => {
   emits("update:modelValue", target.value);
 };
 
-const { forwardRef } = useForwardExpose();
+const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
+
+defineExpose<InputExpose>({
+  getDOMNode: () => inputRef.value,
+});
 </script>
 
 <template>
   <div :class="$style.root">
     <input
-      :ref="forwardRef"
+      ref="inputRef"
       :invalid="invalid"
       :class="$style.input"
       :type="type"

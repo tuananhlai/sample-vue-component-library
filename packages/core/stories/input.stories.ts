@@ -22,13 +22,18 @@ export const VisualTest: Story = {
     setup() {
       const inputRef = useTemplateRef<InputExpose>("inputRef");
 
+      const focus = () => {
+        inputRef.value?.getDOMNode()?.focus();
+      };
+
       return {
         inputRef,
+        focus,
       };
     },
     template: `
     <Input ref="inputRef" placeholder="Enter your name" />
-    <button @click="inputRef?.$el?.focus()">Focus</button>
+    <button @click="focus">Focus</button>
     `,
   }),
 };
