@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
+import { useTemplateRef } from "vue";
 import { Input } from "../src";
+import { InputExpose } from "../src/components/input/Input.vue";
 
 const meta = {
   title: "Input",
@@ -17,6 +19,16 @@ export const Default: Story = {
 export const VisualTest: Story = {
   render: () => ({
     components: { Input },
-    template: `<Input placeholder="Enter your name" />`,
+    setup() {
+      const inputRef = useTemplateRef<InputExpose>("inputRef");
+
+      return {
+        inputRef,
+      };
+    },
+    template: `
+    <Input ref="inputRef" placeholder="Enter your name" />
+    <button @click="inputRef?.$el?.focus()">Focus</button>
+    `,
   }),
 };

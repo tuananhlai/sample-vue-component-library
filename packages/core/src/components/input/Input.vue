@@ -21,23 +21,8 @@ export interface InputProps {
   maxlength?: number;
   pattern?: string;
   spellcheck?: boolean;
-  enterkeyhint?:
-    | "enter"
-    | "done"
-    | "go"
-    | "next"
-    | "previous"
-    | "search"
-    | "send";
-  inputmode?:
-    | "none"
-    | "text"
-    | "tel"
-    | "url"
-    | "email"
-    | "numeric"
-    | "decimal"
-    | "search";
+  enterkeyhint?: InputHTMLAttributes["enterKeyHint"];
+  inputmode?: HTMLAttributes["inputmode"];
 }
 
 export interface InputEmits {
@@ -50,9 +35,15 @@ export interface InputEmits {
   keyup: [event: KeyboardEvent];
   keypress: [event: KeyboardEvent];
 }
+
+export interface InputExpose {
+  $el: HTMLInputElement | null;
+}
 </script>
 
 <script setup lang="ts">
+import { useForwardExpose } from "reka-ui";
+import { HTMLAttributes, InputHTMLAttributes } from "vue";
 
 defineProps<InputProps>();
 
@@ -62,11 +53,14 @@ const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
   emits("update:modelValue", target.value);
 };
+
+const { forwardRef } = useForwardExpose();
 </script>
 
 <template>
   <div :class="$style.root">
     <input
+      :ref="forwardRef"
       :invalid="invalid"
       :class="$style.input"
       :type="type"
