@@ -22,6 +22,8 @@ jobs:
         uses: ./.github/actions/install-dependencies
       - name: Authenticate to GitHub Package Registry
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+      # You need to explicitly allow your repository's Github Actions to make changes to the npm package. 🤦‍♂️
+      # That is so fucking stupid. https://github.com/users/tuananhlai/packages/npm/sample-design-system/settings
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
