@@ -77,13 +77,12 @@ const props = defineProps<ButtonBaseProps>();
 const emit = defineEmits<ButtonBaseEmits>();
 const slots = defineSlots<ButtonBaseSlots>();
 
-const doWhileNotLoading = <T extends (...args: any[]) => any>(fn: T) => {
-  return (...args: Parameters<T>): ReturnType<T> | void => {
-    if (props.loading) {
-      return;
-    }
-    return fn(...args);
-  };
+const doWhileNotLoading = (fn: () => void) => {
+  if (props.loading) {
+    return;
+  }
+
+  fn();
 };
 </script>
 
@@ -111,11 +110,11 @@ const doWhileNotLoading = <T extends (...args: any[]) => any>(fn: T) => {
     :aria-describedby="props['aria-describedby']"
     :aria-details="props['aria-details']"
     :aria-disabled="loading ? true : undefined"
-    @click="doWhileNotLoading((e: MouseEvent) => emit('click', e))"
+    @click="(e: MouseEvent) => doWhileNotLoading(() => emit('click', e))"
     @focus="(e) => emit('focus', e)"
     @blur="(e) => emit('blur', e)"
-    @keydown="doWhileNotLoading((e: KeyboardEvent) => emit('keydown', e))"
-    @keyup="doWhileNotLoading((e: KeyboardEvent) => emit('keyup', e))"
+    @keydown="(e) => doWhileNotLoading(() => emit('keydown', e))"
+    @keyup="(e) => doWhileNotLoading(() => emit('keyup', e))"
   >
     <slot />
   </button>

@@ -12,7 +12,7 @@ const isChecked = ref(false);
 const inputRef = useTemplateRef<InputExpose>("inputRef");
 
 const focus = () => {
-  inputRef.value?.$el?.focus();
+  inputRef.value?.domNode?.focus();
 };
 </script>
 

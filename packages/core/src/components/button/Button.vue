@@ -23,14 +23,14 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const emit = defineEmits<ButtonEmits>();
 const slots = defineSlots<ButtonSlots>();
 
-const forwardEmitProps = useForwardPropsEmits(props, emit);
+const forwarded = useForwardPropsEmits(props, emit);
 </script>
 
 <template>
   <ButtonBase
     :class="$style.root"
     :data-variant="props.variant"
-    v-bind="forwardEmitProps"
+    v-bind="forwarded"
   >
     <slot />
   </ButtonBase>
