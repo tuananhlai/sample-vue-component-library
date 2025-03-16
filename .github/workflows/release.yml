@@ -18,13 +18,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
-      - name: Creating .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Authenticate to GitHub Package Registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
