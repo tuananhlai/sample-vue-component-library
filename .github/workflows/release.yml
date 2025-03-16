@@ -23,7 +23,7 @@ jobs:
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
           EOF
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,6 +32,3 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm run release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
