@@ -15,7 +15,7 @@ export const Default: Story = {
   args: {},
 };
 
-//@ts-expect-error Expression produces a union type that is too complex to represent.ts(2590).
+// @ts-expect-error Expression produces a union type that is too complex to represent.ts(2590)
 export const VisualTest: Story = {
   render: () => ({
     components: { Input },
@@ -23,7 +23,7 @@ export const VisualTest: Story = {
       const inputRef = useTemplateRef<InputExpose>("inputRef");
 
       const focus = () => {
-        inputRef.value?.$el?.focus();
+        inputRef.value?.domNode?.focus();
       };
 
       return {

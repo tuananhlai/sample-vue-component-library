@@ -30,13 +30,13 @@ module.exports = function (plop) {
       // Create test file
       {
         type: "add",
-        path: "packages/core/tests/{{kebabCase componentName}}.test.ts",
+        path: "packages/core/tests/{{componentName}}.test.ts",
         templateFile: "internals/plop-templates/component/test.ts.hbs",
       },
       // Create story file
       {
         type: "add",
-        path: "packages/core/stories/{{kebabCase componentName}}.stories.ts",
+        path: "packages/core/stories/{{componentName}}.stories.ts",
         templateFile: "internals/plop-templates/component/stories.ts.hbs",
       },
       // Add component export to index.ts

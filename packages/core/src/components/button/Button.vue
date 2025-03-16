@@ -1,20 +1,39 @@
 <script lang="ts">
-export interface ButtonProps {
+export interface ButtonProps extends ButtonBaseProps {
   /** @default 'primary' */
   variant?: "primary" | "secondary" | "tertiary";
 }
+
+export interface ButtonEmits extends ButtonBaseEmits {}
+
+export interface ButtonSlots extends ButtonBaseSlots {}
 </script>
 
-<script setup lang="ts">
-withDefaults(defineProps<ButtonProps>(), {
+<script lang="ts" setup>
+import { useForwardPropsEmits } from "reka-ui";
+import ButtonBase, {
+  ButtonBaseEmits,
+  ButtonBaseProps,
+  ButtonBaseSlots,
+} from "./ButtonBase.vue";
+
+const props = withDefaults(defineProps<ButtonProps>(), {
   variant: "primary",
 });
+const emit = defineEmits<ButtonEmits>();
+const slots = defineSlots<ButtonSlots>();
+
+const forwardEmitProps = useForwardPropsEmits(props, emit);
 </script>
 
 <template>
-  <button :class="$style.root" :data-variant="variant">
+  <ButtonBase
+    :class="$style.root"
+    :data-variant="props.variant"
+    v-bind="forwardEmitProps"
+  >
     <slot />
-  </button>
+  </ButtonBase>
 </template>
 
 <style lang="scss" module>

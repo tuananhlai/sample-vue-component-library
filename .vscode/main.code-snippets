@@ -3,11 +3,11 @@
     "prefix": "sfc",
     "body": [
       "<script lang=\"ts\">",
-      "export type ${TM_FILENAME_BASE}Props = {};",
+      "export interface ${TM_FILENAME_BASE}Props {}",
       "",
-      "export type ${TM_FILENAME_BASE}Emits = {};",
+      "export interface ${TM_FILENAME_BASE}Emits {}",
       "",
-      "export type ${TM_FILENAME_BASE}Slots = {};",
+      "export interface ${TM_FILENAME_BASE}Slots {}",
       "",
       "</script>",
       "",
@@ -21,9 +21,9 @@
       "  <div></div>",
       "</template>",
       "",
-      "<style lang=\"scss\" module></style>",
+      "<style lang=\"scss\" module></style>"
     ],
-    "description": "Vue 3 Single File Component boilerplate",
+    "description": "Vue 3 Single File Component boilerplate"
   },
   "Vue Context": {
     "prefix": "vctx",
@@ -49,8 +49,8 @@
       "",
       "  return val;",
       "};",
-      "",
+      ""
     ],
-    "description": "Vue 3 inject/provide context with filename-based naming",
-  },
+    "description": "Vue 3 inject/provide context with filename-based naming"
+  }
 }
