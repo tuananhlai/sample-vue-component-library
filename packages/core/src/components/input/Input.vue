@@ -38,7 +38,7 @@ export interface InputEmits {
 
 export interface InputExpose {
   /** Get the underlying DOM element. */
-  $el: HTMLInputElement | null;
+  domNode: HTMLInputElement | null;
 }
 </script>
 
@@ -57,7 +57,7 @@ const onInput = (event: Event) => {
 const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
 
 defineExpose<InputExpose>({
-  get $el() {
+  get domNode() {
     return inputRef.value;
   },
 });
