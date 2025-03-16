@@ -1,5 +1,19 @@
 <script setup lang="ts">
-import { Button } from "@tuananhlai/sample-design-system";
+import {
+  Button,
+  Checkbox,
+  Input,
+  type InputExpose,
+} from "@tuananhlai/sample-design-system";
+import { ref, useTemplateRef } from "vue";
+
+const isChecked = ref(false);
+
+const inputRef = useTemplateRef<InputExpose>("inputRef");
+
+const focus = () => {
+  inputRef.value?.$el?.focus();
+};
 </script>
 
 <template>
@@ -7,6 +21,9 @@ import { Button } from "@tuananhlai/sample-design-system";
     <Button>Click me</Button>
     <Button variant="secondary">Click me</Button>
     <Button variant="tertiary">Click me</Button>
+    <Checkbox v-model="isChecked">Check me</Checkbox>
+    <Input ref="inputRef" placeholder="Enter your name" />
+    <Button @click="focus">Focus</Button>
   </div>
 </template>
 
