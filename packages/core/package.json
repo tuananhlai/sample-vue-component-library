@@ -55,7 +55,12 @@
     "reka-ui": "^2.0.2"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
+    "registry": "https://npm.pkg.github.com",
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuananhlai/sample-vue-component-library.git",
+    "directory": "packages/core"
   }
 }
