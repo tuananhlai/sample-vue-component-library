@@ -13,6 +13,7 @@ jobs:
       contents: write
       pull-requests: write
       packages: write
+      checks: write
     name: Release
     runs-on: ubuntu-latest
     steps:
@@ -34,4 +35,3 @@ jobs:
           publish: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
