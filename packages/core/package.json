@@ -59,7 +59,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tuananhlai/sample-vue-component-library.git",
+    "url": "https://github.com/tuananhlai/sample-vue-component-library.git",
     "directory": "packages/core"
   }
 }

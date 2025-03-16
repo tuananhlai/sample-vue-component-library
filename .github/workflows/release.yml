@@ -7,11 +7,13 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions: write-all
-
 jobs:
   release:
     name: Release
+    permissions:
+      contents: write
+      pull-requests: write
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
