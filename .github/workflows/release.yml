@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - fix/failed-to-publish-4
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
