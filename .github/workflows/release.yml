@@ -13,7 +13,7 @@ jobs:
       contents: write
       pull-requests: write
       packages: write
-      checks: write
+      id-token: write
     name: Release
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,9 @@ jobs:
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
+            @tuananhlai:registry=https://npm.pkg.github.com
             //npm.pkg.github.com/:_authToken=$NPM_TOKEN
+            always-auth=true
           EOF
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
