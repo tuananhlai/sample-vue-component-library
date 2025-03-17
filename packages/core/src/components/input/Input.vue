@@ -1,6 +1,8 @@
 <script lang="ts">
 export interface InputProps {
   modelValue?: string;
+
+  id?: string;
   invalid?: boolean;
   type?:
     | "text"
@@ -43,16 +45,27 @@ export interface InputExpose {
 </script>
 
 <script setup lang="ts">
-import { HTMLAttributes, InputHTMLAttributes, useTemplateRef } from "vue";
+import {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  useId,
+  useTemplateRef,
+} from "vue";
+import { useFieldContext } from "../field/FieldContext";
 
-defineProps<InputProps>();
-
+const props = defineProps<InputProps>();
 const emits = defineEmits<InputEmits>();
 
 const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
   emits("update:modelValue", target.value);
 };
+
+const inputID = props.id ?? useId();
+const fieldContextValue = useFieldContext();
+if (fieldContextValue != null) {
+  fieldContextValue.formControlID.value = inputID;
+}
 
 const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
 
@@ -67,6 +80,7 @@ defineExpose<InputExpose>({
   <div :class="$style.root">
     <input
       ref="inputRef"
+      :id="inputID"
       :invalid="invalid"
       :class="$style.input"
       :type="type"
@@ -83,6 +97,7 @@ defineExpose<InputExpose>({
       :spellcheck="spellcheck"
       :enter-key-hint="enterKeyHint"
       :inputmode="inputmode"
+      :aria-labelledby="fieldContextValue?.labelID.value"
       @input="onInput"
       @blur="(e) => emits('blur', e)"
       @change="(e) => emits('change', e)"
