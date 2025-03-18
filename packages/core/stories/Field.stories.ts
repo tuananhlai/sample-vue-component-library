@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import { Field, Input, Label } from "../src";
+import { Field, Label, TextInput } from "../src";
 
 const meta = {
   title: "Field",
@@ -16,7 +16,7 @@ export const Default: Story = {
 // @ts-expect-error Expression produces a union type that is too complex to represent.ts(2590)
 export const VisualTest: Story = {
   render: () => ({
-    components: { Field, Label, Input },
+    components: { Field, Label, Input: TextInput },
     template: `<Field>
       <Label>Label</Label>
       <Input />

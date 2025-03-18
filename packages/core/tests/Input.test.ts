@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/vue";
 import { afterEach, describe, expect, it } from "vitest";
-import { Input } from "../src";
+import { TextInput } from "../src";
 
 describe("Input", () => {
   afterEach(() => {
@@ -8,12 +8,12 @@ describe("Input", () => {
   });
 
   it("should have the correct role", () => {
-    render(Input);
+    render(TextInput);
     expect(screen.getByRole("textbox")).toBeInTheDocument();
   });
 
   it("renders with placeholder", () => {
-    render(Input, {
+    render(TextInput, {
       props: {
         placeholder: "Enter your name",
       },
@@ -23,7 +23,7 @@ describe("Input", () => {
   });
 
   it("renders with v-model", async () => {
-    const { emitted } = render(Input, {
+    const { emitted } = render(TextInput, {
       props: {
         modelValue: "Initial value",
       },
@@ -41,7 +41,7 @@ describe("Input", () => {
   });
 
   it("should be disabled when disabled prop is true", () => {
-    render(Input, {
+    render(TextInput, {
       props: {
         disabled: true,
       },
@@ -52,7 +52,7 @@ describe("Input", () => {
   });
 
   it("should be required when required prop is true", () => {
-    render(Input, {
+    render(TextInput, {
       props: {
         required: true,
       },

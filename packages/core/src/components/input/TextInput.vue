@@ -93,12 +93,8 @@ export interface TextInputExpose {
 </script>
 
 <script setup lang="ts">
-import {
-  HTMLAttributes,
-  InputHTMLAttributes,
-  useId,
-  useTemplateRef,
-} from "vue";
+import { useId } from "reka-ui";
+import { HTMLAttributes, InputHTMLAttributes, useTemplateRef } from "vue";
 import { useFieldContext } from "../field/FieldContext";
 
 const props = defineProps<TextInputProps>();
@@ -109,7 +105,7 @@ const onInput = (event: Event) => {
   emits("update:modelValue", target.value);
 };
 
-const inputID = props.id ?? useId();
+const inputID = useId(props.id);
 const fieldContextValue = useFieldContext();
 if (fieldContextValue != null) {
   fieldContextValue.formControlID.value = inputID;
