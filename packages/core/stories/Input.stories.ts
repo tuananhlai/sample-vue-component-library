@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { useTemplateRef } from "vue";
 import { Input } from "../src";
-import { InputExpose } from "../src/components/input/Input.vue";
+import { TextInputExpose } from "../src/components/input/TextInput.vue";
 
 const meta = {
   title: "Input",
@@ -20,7 +20,7 @@ export const VisualTest: Story = {
   render: () => ({
     components: { Input },
     setup() {
-      const inputRef = useTemplateRef<InputExpose>("inputRef");
+      const inputRef = useTemplateRef<TextInputExpose>("inputRef");
 
       const focus = () => {
         inputRef.value?.domNode?.focus();
