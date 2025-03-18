@@ -1,0 +1,223 @@
+<script lang="ts">
+export interface TextInputProps {
+  modelValue?: string;
+
+  /** A unique identifier for the input element. */
+  id?: string;
+  /** Whether the value is invalid. */
+  invalid?: boolean;
+  /** The type of input to render. See MDN. */
+  type?:
+    | "text"
+    | "search"
+    | "url"
+    | "tel"
+    | "email"
+    | "password"
+    | (string & {});
+  /** A hint to the user of what can be entered in the input. */
+  placeholder?: string;
+  /** The name of the input element, used when submitting an HTML form. See MDN. */
+  name?: string;
+  /** Whether the input is disabled. */
+  disabled?: boolean;
+  /** Whether the input can be selected but not changed by the user. */
+  readonly?: boolean;
+  /** Whether user input is required on the input before form submission. */
+  required?: boolean;
+  /** Whether the element should receive focus on render. */
+  autofocus?: boolean;
+  /** Describes the type of autocomplete functionality the input should provide if any. See MDN. */
+  autocomplete?: AutoFill;
+  /** The minimum number of characters required by the input. See MDN. */
+  minlength?: number;
+  /** The maximum number of characters supported by the input. See MDN. */
+  maxlength?: number;
+  /** Regex pattern that the value of the input must match to be valid. See MDN. */
+  pattern?: string;
+  /** An enumerated attribute that defines whether the element may be checked for spelling errors. See MDN. */
+  spellcheck?: boolean;
+  /** An enumerated attribute that defines what action label or icon to preset for the enter key on virtual keyboards. See MDN. */
+  enterKeyHint?: InputHTMLAttributes["enterKeyHint"];
+  /** Hints at the type of data that might be entered by the user while editing the element or its contents. See MDN. */
+  inputmode?: HTMLAttributes["inputmode"];
+
+  /** Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. */
+  "aria-activedescendant"?: string;
+  /**
+   * Indicates whether inputting text could trigger display of predictions of the user's intended value,
+   * and specifies how predictions would be presented if they are made.
+   */
+  "aria-autocomplete"?: "none" | "inline" | "list" | "both";
+  /**
+   * Indicates the availability and type of interactive popup element that can be triggered.
+   */
+  "aria-haspopup"?:
+    | boolean
+    | "false"
+    | "true"
+    | "menu"
+    | "listbox"
+    | "tree"
+    | "grid"
+    | "dialog";
+  /** Identifies the element(s) whose contents or presence are controlled by the current element. */
+  "aria-controls"?: string;
+  /** Defines a string value that labels the current element. */
+  "aria-label"?: string;
+  /** Identifies the element(s) that labels the current element. */
+  "aria-labelledby"?: string;
+  /** Identifies the element(s) that describes the object. */
+  "aria-describedby"?: string;
+  /** Identifies the element(s) that provide a detailed, extended description for the object. */
+  "aria-details"?: string;
+  /** Identifies the element that provides an error message for the object. */
+  "aria-errormessage"?: string;
+}
+
+export interface TextInputEmits {
+  "update:modelValue": [value: string];
+  blur: [event: FocusEvent];
+  focus: [event: FocusEvent];
+  change: [event: Event];
+
+  keydown: [event: KeyboardEvent];
+  keyup: [event: KeyboardEvent];
+  keypress: [event: KeyboardEvent];
+}
+
+export interface TextInputExpose {
+  /** Get the underlying DOM element. */
+  domNode: HTMLInputElement | null;
+}
+</script>
+
+<script setup lang="ts">
+import { useId } from "reka-ui";
+import {
+  computed,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  onMounted,
+  onUnmounted,
+  useTemplateRef,
+} from "vue";
+import { useFieldContext } from "../field/FieldContext";
+
+const props = defineProps<TextInputProps>();
+const emits = defineEmits<TextInputEmits>();
+
+const onInput = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  emits("update:modelValue", target.value);
+};
+
+const inputID = useId(props.id);
+const fieldContextValue = useFieldContext();
+onMounted(() => onUnmounted(fieldContextValue?.registerFormControl(inputID)));
+
+const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
+
+const ariaLabelledBy = computed(() => {
+  const labelledBy = [];
+
+  if (props["aria-labelledby"]) {
+    labelledBy.push(props["aria-labelledby"]);
+  }
+
+  if (fieldContextValue?.labelledBy != null) {
+    labelledBy.push(...fieldContextValue.labelledBy.value);
+  }
+
+  if (labelledBy.length === 0) {
+    return undefined;
+  }
+
+  return labelledBy.join(" ");
+});
+
+const ariaDescribedBy = computed(() => {
+  const describedBy = [];
+
+  if (props["aria-describedby"]) {
+    describedBy.push(props["aria-describedby"]);
+  }
+
+  if (fieldContextValue?.describedBy != null) {
+    describedBy.push(...fieldContextValue.describedBy.value);
+  }
+
+  if (describedBy.length === 0) {
+    return undefined;
+  }
+
+  return describedBy.join(" ");
+});
+
+defineExpose<TextInputExpose>({
+  get domNode() {
+    return inputRef.value;
+  },
+});
+</script>
+
+<template>
+  <div :class="$style.root">
+    <input
+      ref="inputRef"
+      :id="inputID"
+      :invalid="invalid"
+      :class="$style.input"
+      :type="type"
+      :value="modelValue"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
+      :required="required"
+      :autofocus="autofocus"
+      :autocomplete="autocomplete"
+      :minlength="minlength"
+      :maxlength="maxlength"
+      :pattern="pattern"
+      :spellcheck="spellcheck"
+      :enter-key-hint="enterKeyHint"
+      :inputmode="inputmode"
+      :aria-labelledby="ariaLabelledBy"
+      :aria-describedby="ariaDescribedBy"
+      @input="onInput"
+      @blur="(e) => emits('blur', e)"
+      @change="(e) => emits('change', e)"
+      @focus="(e) => emits('focus', e)"
+      @keydown="(e) => emits('keydown', e)"
+      @keyup="(e) => emits('keyup', e)"
+      @keypress="(e) => emits('keypress', e)"
+    />
+  </div>
+</template>
+
+<style lang="scss" module>
+.root {
+  display: flex;
+}
+
+.input {
+  width: 100%;
+  padding: var(--bw-space-2) var(--bw-space-3);
+  border-radius: var(--bw-radius-md);
+  border: 1px solid var(--bw-color-zinc-300);
+  font-size: var(--bw-font-base);
+  line-height: var(--bw-line-normal);
+  background: var(--bw-color-white);
+  color: var(--bw-color-zinc-900);
+
+  &::placeholder {
+    color: var(--bw-color-zinc-400);
+  }
+
+  &:focus {
+    outline: 2px solid var(--bw-color-primary);
+    outline-offset: -2px;
+    border-color: var(--bw-color-primary);
+  }
+}
+</style>
