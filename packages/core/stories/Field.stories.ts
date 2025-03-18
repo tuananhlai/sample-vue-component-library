@@ -16,10 +16,10 @@ export const Default: Story = {
 // @ts-expect-error Expression produces a union type that is too complex to represent.ts(2590)
 export const VisualTest: Story = {
   render: () => ({
-    components: { Field, Label, Input: TextInput },
+    components: { Field, Label, TextInput },
     template: `<Field>
       <Label>Label</Label>
-      <Input />
+      <TextInput />
     </Field>`,
   }),
 };

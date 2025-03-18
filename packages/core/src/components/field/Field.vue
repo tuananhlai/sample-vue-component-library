@@ -9,19 +9,13 @@ export interface FieldSlots {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { provideFieldContext } from "./FieldContext";
+import { useField } from "./FieldContext";
 
 const props = defineProps<FieldProps>();
 const emits = defineEmits<FieldEmits>();
 const slots = defineSlots<FieldSlots>();
 
-provideFieldContext({
-  labelID: ref<string | undefined>(),
-  descriptionID: ref<string | undefined>(),
-  formControlID: ref<string | undefined>(),
-  errorMessageID: ref<string | undefined>(),
-});
+useField();
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script lang="ts">
 export interface TextInputProps {
-  modelValue: string;
+  modelValue?: string;
 
   /** A unique identifier for the input element. */
   id?: string;
@@ -94,7 +94,13 @@ export interface TextInputExpose {
 
 <script setup lang="ts">
 import { useId } from "reka-ui";
-import { HTMLAttributes, InputHTMLAttributes, useTemplateRef } from "vue";
+import {
+  computed,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  onMounted,
+  useTemplateRef,
+} from "vue";
 import { useFieldContext } from "../field/FieldContext";
 
 const props = defineProps<TextInputProps>();
@@ -107,11 +113,21 @@ const onInput = (event: Event) => {
 
 const inputID = useId(props.id);
 const fieldContextValue = useFieldContext();
-if (fieldContextValue != null) {
-  fieldContextValue.formControlID.value = inputID;
-}
+onMounted(() => fieldContextValue?.registerFormControl(inputID));
 
 const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
+
+const ariaLabelledBy = computed(() => {
+  return `${
+    props["aria-labelledby"]
+  } ${fieldContextValue?.labelledBy.value.join(" ")}`;
+});
+
+const ariaDescribedBy = computed(() => {
+  return `${
+    props["aria-describedby"]
+  } ${fieldContextValue?.describedBy.value.join(" ")}`;
+});
 
 defineExpose<TextInputExpose>({
   get domNode() {
@@ -141,7 +157,8 @@ defineExpose<TextInputExpose>({
       :spellcheck="spellcheck"
       :enter-key-hint="enterKeyHint"
       :inputmode="inputmode"
-      :aria-labelledby="fieldContextValue?.labelID.value"
+      :aria-labelledby="ariaLabelledBy"
+      :aria-describedby="ariaDescribedBy"
       @input="onInput"
       @blur="(e) => emits('blur', e)"
       @change="(e) => emits('change', e)"
