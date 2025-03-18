@@ -99,6 +99,7 @@ import {
   HTMLAttributes,
   InputHTMLAttributes,
   onMounted,
+  onUnmounted,
   useTemplateRef,
 } from "vue";
 import { useFieldContext } from "../field/FieldContext";
@@ -113,20 +114,44 @@ const onInput = (event: Event) => {
 
 const inputID = useId(props.id);
 const fieldContextValue = useFieldContext();
-onMounted(() => fieldContextValue?.registerFormControl(inputID));
+onMounted(() => onUnmounted(fieldContextValue?.registerFormControl(inputID)));
 
 const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
 
 const ariaLabelledBy = computed(() => {
-  return `${
-    props["aria-labelledby"]
-  } ${fieldContextValue?.labelledBy.value.join(" ")}`;
+  const labelledBy = [];
+
+  if (props["aria-labelledby"]) {
+    labelledBy.push(props["aria-labelledby"]);
+  }
+
+  if (fieldContextValue?.labelledBy != null) {
+    labelledBy.push(...fieldContextValue.labelledBy.value);
+  }
+
+  if (labelledBy.length === 0) {
+    return undefined;
+  }
+
+  return labelledBy.join(" ");
 });
 
 const ariaDescribedBy = computed(() => {
-  return `${
-    props["aria-describedby"]
-  } ${fieldContextValue?.describedBy.value.join(" ")}`;
+  const describedBy = [];
+
+  if (props["aria-describedby"]) {
+    describedBy.push(props["aria-describedby"]);
+  }
+
+  if (fieldContextValue?.describedBy != null) {
+    describedBy.push(...fieldContextValue.describedBy.value);
+  }
+
+  if (describedBy.length === 0) {
+    return undefined;
+  }
+
+  return describedBy.join(" ");
 });
 
 defineExpose<TextInputExpose>({

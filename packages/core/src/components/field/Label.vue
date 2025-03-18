@@ -10,7 +10,7 @@ export interface LabelSlots {
 
 <script lang="ts" setup>
 import { Label, useId } from "reka-ui";
-import { computed, ComputedRef, onMounted } from "vue";
+import { computed, ComputedRef, onMounted, onUnmounted } from "vue";
 import { useFieldContext } from "./FieldContext";
 
 const props = defineProps<LabelProps>();
@@ -18,7 +18,7 @@ const slots = defineSlots<LabelSlots>();
 
 const labelID = useId(props.id);
 const fieldContextValue = useFieldContext();
-onMounted(() => fieldContextValue?.registerLabel(labelID));
+onMounted(() => onUnmounted(fieldContextValue?.registerLabel(labelID)));
 
 const componentAs: ComputedRef<"span" | "label"> = computed(() => {
   return fieldContextValue?.formControlID.value != null ? "label" : "span";

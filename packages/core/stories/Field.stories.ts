@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
+import { ref } from "vue";
 import { Field, Label, TextInput } from "../src";
 
 const meta = {
@@ -17,9 +18,15 @@ export const Default: Story = {
 export const VisualTest: Story = {
   render: () => ({
     components: { Field, Label, TextInput },
+    setup() {
+      const showLabel = ref(true);
+
+      return { showLabel };
+    },
     template: `<Field>
-      <Label>Label</Label>
+      <Label v-if="showLabel">Label</Label>
       <TextInput />
+      <button @click="showLabel = !showLabel">Toggle label</button>
     </Field>`,
   }),
 };
