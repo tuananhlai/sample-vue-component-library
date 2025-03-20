@@ -4,5 +4,6 @@ import "./styles/tokens.css";
 
 export * from "./components/button";
 export * from "./components/checkbox";
-export * from "./components/input";
 export * from "./components/field";
+export * from "./components/text-field";
+

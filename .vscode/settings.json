@@ -2,6 +2,5 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always"
   },
-  "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.tabSize": 2
 }

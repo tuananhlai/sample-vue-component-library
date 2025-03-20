@@ -28,7 +28,7 @@ export interface TextInputProps {
   /** Whether the element should receive focus on render. */
   autofocus?: boolean;
   /** Describes the type of autocomplete functionality the input should provide if any. See MDN. */
-  autocomplete?: AutoFill;
+  autocomplete?: InputHTMLAttributes["autocomplete"];
   /** The minimum number of characters required by the input. See MDN. */
   minlength?: number;
   /** The maximum number of characters supported by the input. See MDN. */
@@ -48,19 +48,11 @@ export interface TextInputProps {
    * Indicates whether inputting text could trigger display of predictions of the user's intended value,
    * and specifies how predictions would be presented if they are made.
    */
-  "aria-autocomplete"?: "none" | "inline" | "list" | "both";
+  "aria-autocomplete"?: InputHTMLAttributes["aria-autocomplete"];
   /**
    * Indicates the availability and type of interactive popup element that can be triggered.
    */
-  "aria-haspopup"?:
-    | boolean
-    | "false"
-    | "true"
-    | "menu"
-    | "listbox"
-    | "tree"
-    | "grid"
-    | "dialog";
+  "aria-haspopup"?: InputHTMLAttributes["aria-haspopup"];
   /** Identifies the element(s) whose contents or presence are controlled by the current element. */
   "aria-controls"?: string;
   /** Defines a string value that labels the current element. */
@@ -104,7 +96,9 @@ import {
 } from "vue";
 import { useFieldContext } from "../field/FieldContext";
 
-const props = defineProps<TextInputProps>();
+const props = withDefaults(defineProps<TextInputProps>(), {
+  type: "text",
+});
 const emits = defineEmits<TextInputEmits>();
 
 const onInput = (event: Event) => {
