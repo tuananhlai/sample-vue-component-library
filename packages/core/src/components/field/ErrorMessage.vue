@@ -1,9 +1,9 @@
 <script lang="ts">
-export interface DescriptionProps {
+export interface ErrorMessageProps {
   id?: string;
 }
 
-export interface DescriptionSlots {
+export interface ErrorMessageSlots {
   default(): void;
 }
 </script>
@@ -13,24 +13,25 @@ import { useId } from "reka-ui";
 import { onMounted, onUnmounted } from "vue";
 import { useFieldContext } from "./FieldContext";
 
-const props = defineProps<DescriptionProps>();
-const slots = defineSlots<DescriptionSlots>();
+const props = defineProps<ErrorMessageProps>();
+const slots = defineSlots<ErrorMessageSlots>();
 
-const descriptionID = useId(props.id);
+const errorMessageID = useId(props.id);
 const fieldContextValue = useFieldContext();
+
 onMounted(() =>
-  onUnmounted(fieldContextValue?.registerDescription(descriptionID))
+  onUnmounted(fieldContextValue?.registerDescription(errorMessageID))
 );
 </script>
 
 <template>
-  <div :id="descriptionID" :class="$style.root">
+  <div :id="errorMessageID" :class="$style.root">
     <slot />
   </div>
 </template>
 
 <style lang="scss" module>
 .root {
-  color: var(--bw-color-zinc-700);
+  color: var(--bw-color-red-500);
 }
 </style>

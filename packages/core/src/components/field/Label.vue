@@ -1,6 +1,10 @@
 <script lang="ts">
 export interface LabelProps {
   id?: string;
+  /** True to display a required indicator. */
+  required?: boolean;
+  /** True to display the disabled variant of the label. */
+  disabled?: boolean;
 }
 
 export interface LabelSlots {
@@ -30,9 +34,15 @@ const componentAs: ComputedRef<"span" | "label"> = computed(() => {
     :as="componentAs"
     :id="labelID"
     :for="fieldContextValue?.formControlID.value"
+    :data-required="props.required || undefined"
+    :data-disabled="props.disabled || undefined"
   >
     <slot />
   </Label>
 </template>
 
-<style lang="scss" module></style>
+<style lang="scss" module>
+.root {
+  font-weight: var(--bw-weight-medium);
+}
+</style>
