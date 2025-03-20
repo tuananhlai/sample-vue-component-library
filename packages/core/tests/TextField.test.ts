@@ -1,6 +1,27 @@
-import { it, expect } from 'vitest';
-import { TextField } from '../src';
+import { cleanup, render, screen } from "@testing-library/vue";
+import { afterEach, describe, expect, it } from "vitest";
+import { TextField } from "../src";
 
-it('should render', () => {
-  expect(true).toBe(true);
+describe("TextField", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("should render", () => {
+    render(TextField);
+
+    expect(screen.getByRole("textbox")).toBeInTheDocument();
+  });
+
+  it("should be associated with label", () => {
+    render(TextField, {
+      props: {
+        label: "example",
+      },
+    });
+
+    expect(
+      screen.getByRole("textbox", { name: /example/i })
+    ).toBeInTheDocument();
+  });
 });

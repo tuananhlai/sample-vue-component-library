@@ -15,12 +15,15 @@ export interface TextFieldSlots {
 </script>
 
 <script setup lang="ts">
+import { useForwardPropsEmits } from "reka-ui";
 import { Description, ErrorMessage, Field, Label } from "../field";
 import TextInput, { TextInputEmits, TextInputProps } from "./TextInput.vue";
 
 const props = defineProps<TextFieldProps>();
 const emits = defineEmits<TextFieldEmits>();
 const slots = defineSlots<TextFieldSlots>();
+
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
@@ -29,7 +32,7 @@ const slots = defineSlots<TextFieldSlots>();
       <slot name="label" v-if="slots.label" />
       <template v-else>{{ props.label }}</template>
     </Label>
-    <TextInput v-bind="$attrs" />
+    <TextInput v-bind="forwarded" />
     <Description v-if="slots.description || props.description">
       <slot name="description" v-if="slots.description" />
       <template v-else>{{ props.description }}</template>
