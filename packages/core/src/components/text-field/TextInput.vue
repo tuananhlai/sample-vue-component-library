@@ -90,8 +90,9 @@ import {
   computed,
   HTMLAttributes,
   InputHTMLAttributes,
+  onMounted,
   onUnmounted,
-  useTemplateRef
+  useTemplateRef,
 } from "vue";
 import { useFieldContext } from "../field/FieldContext";
 
@@ -107,7 +108,7 @@ const onInput = (event: Event) => {
 
 const inputID = useId(props.id);
 const fieldContextValue = useFieldContext();
-onUnmounted(fieldContextValue?.registerFormControl(inputID));
+onMounted(() => onUnmounted(fieldContextValue?.registerFormControl(inputID)));
 
 const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
 

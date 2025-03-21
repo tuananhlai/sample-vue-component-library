@@ -10,7 +10,7 @@ export interface DescriptionSlots {
 
 <script lang="ts" setup>
 import { useId } from "reka-ui";
-import { onUnmounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { useFieldContext } from "./FieldContext";
 
 const props = defineProps<DescriptionProps>();
@@ -18,7 +18,9 @@ const slots = defineSlots<DescriptionSlots>();
 
 const descriptionID = useId(props.id);
 const fieldContextValue = useFieldContext();
-onUnmounted(fieldContextValue?.registerDescription(descriptionID));
+onMounted(() =>
+  onUnmounted(fieldContextValue?.registerDescription(descriptionID))
+);
 </script>
 
 <template>
