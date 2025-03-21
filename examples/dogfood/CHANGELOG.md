@@ -1,5 +1,11 @@
 # dogfood
 
+## 0.0.3
+
+### Patch Changes
+
+- fd97010: feat/text-field: initialize
+
 ## 0.0.2
 
 ### Patch Changes
