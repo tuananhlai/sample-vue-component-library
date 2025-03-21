@@ -14,13 +14,16 @@ describe("TextField", () => {
     expect(screen.getByRole("textbox")).toBeInTheDocument();
   });
 
-  it("should be associated with label", async () => {
+  it("should render a label and associate it with the input when `label` prop is passed", async () => {
     render(TextField, {
       props: {
         label: "example",
       },
     });
 
+    // Wait for `onMounted` to finish before continuing with
+    // the assertions.
+    // TODO: Figure out a way to avoid having to called `nextTick`.
     await nextTick();
 
     expect(
