@@ -7,3 +7,4 @@ export * from "./components/checkbox";
 export * from "./components/field";
 export * from "./components/text-field";
 
+export * from "./components/checkbox-group";
