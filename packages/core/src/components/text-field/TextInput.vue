@@ -110,7 +110,7 @@ const inputID = useId(props.id);
 const fieldContextValue = useFieldContext();
 onMounted(() => onUnmounted(fieldContextValue?.registerFormControl(inputID)));
 
-const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
+const inputRef = useTemplateRef<HTMLInputElement>("input-ref");
 
 const ariaLabelledBy = computed(() => {
   const labelledBy = [];
@@ -158,7 +158,7 @@ defineExpose<TextInputExpose>({
 <template>
   <div :class="$style.root">
     <input
-      ref="inputRef"
+      ref="input-ref"
       :id="inputID"
       :invalid="invalid"
       :class="$style.input"

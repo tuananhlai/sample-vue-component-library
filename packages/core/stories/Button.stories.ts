@@ -15,18 +15,18 @@ export const Default: Story = {
   render: () => ({
     components: { Button },
     setup() {
-      const buttonRef = useTemplateRef("buttonRef");
+      const buttonRefVar = useTemplateRef("button-ref");
 
-      watch(buttonRef, (value) => {
+      watch(buttonRefVar, (value) => {
         console.log(value);
       });
 
       return {
-        buttonRef,
+        buttonRef: buttonRefVar,
       };
     },
     template: `<div style="display: flex; gap: 1rem;">
-      <Button ref="buttonRef">Click me</Button>
+      <Button ref="button-ref">Click me</Button>
       <Button variant="secondary">Click me</Button>
       <Button variant="tertiary">Click me</Button>
     </div>`,
