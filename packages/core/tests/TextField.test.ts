@@ -1,20 +1,15 @@
 import userEvent from "@testing-library/user-event";
 import {
-  cleanup,
   render,
   RenderOptions,
   RenderResult,
   screen,
 } from "@testing-library/vue";
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { nextTick } from "vue";
-import { TextField } from "../src";
+import { describe, expect, it, vi } from "vitest";
+import { h, nextTick, useTemplateRef } from "vue";
+import { TextField, TextFieldExpose } from "../src";
 
 describe("TextField", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render", async () => {
     await renderTextField({});
 
@@ -55,6 +50,32 @@ describe("TextField", () => {
     expect(input).toHaveAccessibleDescription("error");
   });
 
+  it("should accept label, description and errorMessage slots", async () => {
+    await renderTextField({
+      slots: {
+        label: "labelSlot",
+        description: "descriptionSlot",
+        errorMessage: "errorMessageSlot",
+      },
+    });
+
+    expect(screen.getByLabelText("labelSlot")).toBeInTheDocument();
+    expect(screen.getByText("descriptionSlot")).toBeInTheDocument();
+    expect(screen.getByText("errorMessageSlot")).toBeInTheDocument();
+  });
+
+  it("should not render a label when `label` prop is not passed and there is no label slot", async () => {
+    await renderTextField({});
+
+    expect(document.querySelector("label")).not.toBeInTheDocument();
+  });
+
+  it("should not render a description or error message when `description` or `errorMessage` prop is not passed and there is no description or errorMessage slot", async () => {
+    await renderTextField({});
+
+    expect(screen.getByRole("textbox")).not.toHaveAccessibleDescription();
+  });
+
   it("should work with `v-model`", async () => {
     const onUpdate = vi.fn();
 
@@ -71,6 +92,29 @@ describe("TextField", () => {
     await userEvent.type(input, "test");
 
     expect(onUpdate).toHaveBeenCalledWith("exampletest");
+  });
+
+  it("should expose the input element", async () => {
+    render(
+      h({
+        setup() {
+          const textFieldRef = useTemplateRef<TextFieldExpose>("textFieldRef");
+
+          return {
+            textFieldRef,
+          };
+        },
+        template: `<TextField ref="textFieldRef" />
+        <div data-testid="result">{{ textFieldRef?.input }}</div>
+        `,
+        components: {
+          TextField,
+        },
+      })
+    );
+    await nextTick();
+
+    expect(screen.getByTestId("result")).toHaveTextContent("[object HTMLInputElement]");
   });
 });
 

@@ -1,6 +1,14 @@
 export { default as TextField } from "./TextField.vue";
-export type { 
-  TextFieldProps,
+export type {
   TextFieldEmits,
-  TextFieldSlots,
+  TextFieldExpose,
+  TextFieldProps,
+  TextFieldSlots
 } from "./TextField.vue";
+export { default as TextInput } from "./TextInput.vue";
+export type {
+  TextInputEmits,
+  TextInputExpose,
+  TextInputProps
+} from "./TextInput.vue";
+
