@@ -24,6 +24,8 @@ const labelID = useId(props.id);
 const fieldContextValue = useFieldContext();
 onMounted(() => onUnmounted(fieldContextValue?.registerLabel(labelID)));
 
+// If a form control is present, we need to associate the label using the `for` attribute,
+// otherwise we use a `span` to be more explicit about the semantic meaning of the label.
 const componentAs: ComputedRef<"span" | "label"> = computed(() => {
   return fieldContextValue?.formControlID.value != null ? "label" : "span";
 });

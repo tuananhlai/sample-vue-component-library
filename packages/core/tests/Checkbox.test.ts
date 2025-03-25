@@ -1,12 +1,8 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/vue";
-import { afterEach, describe, expect, it } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/vue";
+import { describe, expect, it } from "vitest";
 import { Checkbox } from "../src";
 
 describe("Checkbox", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should have the correct role", () => {
     render(Checkbox);
     expect(screen.getByRole("checkbox")).toBeInTheDocument();
