@@ -2,6 +2,7 @@
 import {
   Button,
   Checkbox,
+  CheckboxGroupField,
   TextField,
   type TextFieldExpose,
 } from "@tuananhlai/sample-design-system";
@@ -24,6 +25,17 @@ const focus = () => {
     <Checkbox v-model="isChecked">Check me</Checkbox>
     <TextField ref="text-field-ref" label="Enter your name" />
     <Button @click="focus">Focus</Button>
+    <CheckboxGroupField label="Checkboxes">
+      <Checkbox value="one">Option 1</Checkbox>
+      <Checkbox value="two">Option 2</Checkbox>
+      <Checkbox value="three">Option 3</Checkbox>
+      <template #description>
+        <p :class="$style.description">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          quos.
+        </p>
+      </template>
+    </CheckboxGroupField>
   </div>
 </template>
 
@@ -32,5 +44,11 @@ const focus = () => {
   display: flex;
   gap: var(--bw-space-2);
   align-items: center;
+}
+
+.description {
+  font-size: var(--bw-font-sm);
+  color: var(--bw-color-zinc-500);
+  margin-top: var(--bw-space-2);
 }
 </style>

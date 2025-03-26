@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface ButtonBaseProps {
+export interface ButtonBaseProps extends AriaLabellingProps {
   loading?: boolean;
 
   id?: string;
@@ -23,6 +23,7 @@ export interface ButtonBaseProps {
   disabled?: boolean;
   /** @default 'button' */
   type?: "button" | "submit" | "reset";
+
   /** Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed */
   "aria-expanded"?: boolean | "true" | "false";
   /** Indicates the availability and type of interactive popup element that can be triggered */
@@ -49,14 +50,6 @@ export interface ButtonBaseProps {
     | "location"
     | "date"
     | "time";
-  /** Defines a string value that labels the current element */
-  "aria-label"?: string;
-  /** Identifies the element(s) that labels the current element */
-  "aria-labelledby"?: string;
-  /** Identifies the element(s) that describes the object */
-  "aria-describedby"?: string;
-  /** Identifies the element that provides a detailed, extended description for the object */
-  "aria-details"?: string;
 }
 
 export interface ButtonBaseEmits {
@@ -73,6 +66,8 @@ export interface ButtonBaseSlots {
 </script>
 
 <script setup lang="ts">
+import { AriaLabellingProps } from "@/utils/AriaLabellingProps";
+
 const props = defineProps<ButtonBaseProps>();
 const emit = defineEmits<ButtonBaseEmits>();
 const slots = defineSlots<ButtonBaseSlots>();

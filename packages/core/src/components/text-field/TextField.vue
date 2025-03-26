@@ -1,20 +1,9 @@
 <script lang="ts">
-export interface TextFieldProps extends TextInputProps {
-  label?: string;
-  description?: string;
-  errorMessage?: string;
-}
+export interface TextFieldProps extends FieldComponentProps, TextInputProps {}
 
 export interface TextFieldEmits extends TextInputEmits {}
 
-export interface TextFieldSlots {
-  /** The label of the text field. Overrides the `label` prop. */
-  label?(): void;
-  /** The description of the text field. Overrides the `description` prop. */
-  description?(): void;
-  /** The error message of the text field. Overrides the `errorMessage` prop. */
-  errorMessage?(): void;
-}
+export interface TextFieldSlots extends FieldComponentSlots {}
 
 export interface TextFieldExpose {
   input: HTMLInputElement | null;
@@ -22,8 +11,12 @@ export interface TextFieldExpose {
 </script>
 
 <script setup lang="ts">
+import {
+  FieldComponentProps,
+  FieldComponentSlots,
+} from "@/utils/FieldComponent";
 import { useForwardPropsEmits } from "reka-ui";
-import { useTemplateRef } from "vue";
+import { computed, useTemplateRef } from "vue";
 import { Description, ErrorMessage, Field, Label } from "../field";
 import TextInput, {
   TextInputEmits,
@@ -36,7 +29,12 @@ const emits = defineEmits<TextFieldEmits>();
 const slots = defineSlots<TextFieldSlots>();
 
 const textInputRef = useTemplateRef<TextInputExpose>("text-input-ref");
-const forwarded = useForwardPropsEmits(props, emits);
+
+const textInputProps = computed<TextInputProps>(() => {
+  const { label, description, errorMessage, ...rest } = props;
+  return rest;
+});
+const forwarded = useForwardPropsEmits(textInputProps, emits);
 
 defineExpose<TextFieldExpose>({
   get input() {

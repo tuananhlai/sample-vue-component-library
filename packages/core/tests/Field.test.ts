@@ -61,4 +61,32 @@ describe("Field", () => {
       "error message"
     );
   });
+
+  it("should associate label, description and error message with custom IDs", async () => {
+    render(Field, {
+      slots: {
+        default: h({
+          template: `<Label id="label">label</Label>
+          <TextInput />
+          <Description id="description">description</Description>
+          <ErrorMessage id="error-message">error message</ErrorMessage>`,
+          components: {
+            Label,
+            TextInput,
+            Description,
+            ErrorMessage,
+          },
+        }),
+      },
+    });
+    await nextTick();
+
+    expect(screen.getByRole("textbox", { name: "label" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox")).toHaveAccessibleDescription(
+      /description/i
+    );
+    expect(screen.getByRole("textbox")).toHaveAccessibleDescription(
+      /error message/i
+    );
+  });
 });

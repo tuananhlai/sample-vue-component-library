@@ -58,6 +58,7 @@ const forwardedPropEmits = useForwardPropsEmits(props, emits);
 }
 
 .checkboxRoot {
+  flex-shrink: 0;
   width: var(--bw-space-5);
   height: var(--bw-space-5);
   display: flex;

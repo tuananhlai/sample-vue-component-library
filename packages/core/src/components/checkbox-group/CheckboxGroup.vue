@@ -1,14 +1,19 @@
 <script lang="ts">
-export interface CheckboxGroupProps extends CheckboxGroupRootProps {
+export interface CheckboxGroupProps
+  extends AriaLabellingProps,
+    CheckboxGroupRootProps {
+  /** A unique identifier for the element. */
+  id?: string;
+  /** Whether the input value is invalid. */
+  invalid?: boolean;
   /**
    * The orientation of the checkboxes within this group.
    * @default "vertical"
    */
   orientation?: "horizontal" | "vertical";
 
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-describedby"?: string;
+  /** Identifies the element that provides an error message for the object. */
+  "aria-errormessage"?: string;
 }
 
 export interface CheckboxGroupEmits extends CheckboxGroupRootEmits {}
@@ -20,15 +25,16 @@ export interface CheckboxGroupSlots {
 /**
  * @example
  * <CheckboxGroup orientation="horizontal">
- *   <Checkbox>Option 1</Checkbox>
- *   <Checkbox>Option 2</Checkbox>
- *   <Checkbox>Option 3</Checkbox>
+ *   <Checkbox value="one">Option 1</Checkbox>
+ *   <Checkbox value="two">Option 2</Checkbox>
+ *   <Checkbox value="three">Option 3</Checkbox>
  * </CheckboxGroup>
  */
 export default {};
 </script>
 
 <script lang="ts" setup>
+import { AriaLabellingProps } from "@/utils/AriaLabellingProps";
 import clsx from "clsx";
 import {
   CheckboxGroupRoot,
@@ -47,6 +53,8 @@ const slots = defineSlots<CheckboxGroupSlots>();
 const forwarded = useForwardPropsEmits(props, emits);
 
 const fieldContextValue = useFieldContext();
+
+// TODO: Apply invalid state to all child checkboxes when invalid prop is set?
 </script>
 
 <template>
@@ -54,6 +62,8 @@ const fieldContextValue = useFieldContext();
     :class="$style.root"
     :data-orientation="orientation"
     v-bind="forwarded"
+    :data-invalid="invalid || undefined"
+    :aria-invalid="invalid"
     :aria-label="props['aria-label']"
     :aria-labelledby="
       clsx(props['aria-labelledby'], fieldContextValue?.labelledBy.value) ||
@@ -63,6 +73,8 @@ const fieldContextValue = useFieldContext();
       clsx(props['aria-describedby'], fieldContextValue?.describedBy.value) ||
       undefined
     "
+    :aria-details="props['aria-details']"
+    :aria-errormessage="props['aria-errormessage']"
   >
     <slot />
   </CheckboxGroupRoot>

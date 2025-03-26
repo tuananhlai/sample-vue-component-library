@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface TextInputProps {
+export interface TextInputProps extends AriaLabellingProps {
   modelValue?: string;
 
   /** A unique identifier for the input element. */
   id?: string;
   /** Whether the value is invalid. */
   invalid?: boolean;
-  /** The type of input to render. See MDN. */
+  /** The type of input to render. */
   type?:
     | "text"
     | "search"
@@ -17,7 +17,7 @@ export interface TextInputProps {
     | (string & {});
   /** A hint to the user of what can be entered in the input. */
   placeholder?: string;
-  /** The name of the input element, used when submitting an HTML form. See MDN. */
+  /** The name of the input element, used when submitting an HTML form. */
   name?: string;
   /** Whether the input is disabled. */
   disabled?: boolean;
@@ -27,19 +27,34 @@ export interface TextInputProps {
   required?: boolean;
   /** Whether the element should receive focus on render. */
   autofocus?: boolean;
-  /** Describes the type of autocomplete functionality the input should provide if any. See MDN. */
+  /**
+   * Describes the type of autocomplete functionality the input should provide if any.
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete
+   */
   autocomplete?: InputHTMLAttributes["autocomplete"];
-  /** The minimum number of characters required by the input. See MDN. */
+  /** The minimum number of characters required by the input. */
   minlength?: number;
-  /** The maximum number of characters supported by the input. See MDN. */
+  /** The maximum number of characters supported by the input. */
   maxlength?: number;
-  /** Regex pattern that the value of the input must match to be valid. See MDN. */
+  /**
+   * Regex pattern that the value of the input must match to be valid.
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefpattern
+   */
   pattern?: string;
-  /** An enumerated attribute that defines whether the element may be checked for spelling errors. See MDN. */
+  /**
+   * An enumerated attribute that defines whether the element may be checked for spelling errors.
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/spellcheck
+   */
   spellcheck?: boolean;
-  /** An enumerated attribute that defines what action label or icon to preset for the enter key on virtual keyboards. See MDN. */
+  /**
+   * An enumerated attribute that defines what action label or icon to preset for the enter key on virtual keyboards.
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint
+   */
   enterKeyHint?: InputHTMLAttributes["enterKeyHint"];
-  /** Hints at the type of data that might be entered by the user while editing the element or its contents. See MDN. */
+  /**
+   * Hints at the type of data that might be entered by the user while editing the element or its contents.
+   * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
+   */
   inputmode?: HTMLAttributes["inputmode"];
 
   /** Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. */
@@ -55,14 +70,6 @@ export interface TextInputProps {
   "aria-haspopup"?: InputHTMLAttributes["aria-haspopup"];
   /** Identifies the element(s) whose contents or presence are controlled by the current element. */
   "aria-controls"?: string;
-  /** Defines a string value that labels the current element. */
-  "aria-label"?: string;
-  /** Identifies the element(s) that labels the current element. */
-  "aria-labelledby"?: string;
-  /** Identifies the element(s) that describes the object. */
-  "aria-describedby"?: string;
-  /** Identifies the element(s) that provide a detailed, extended description for the object. */
-  "aria-details"?: string;
   /** Identifies the element that provides an error message for the object. */
   "aria-errormessage"?: string;
 }
@@ -85,6 +92,7 @@ export interface TextInputExpose {
 </script>
 
 <script setup lang="ts">
+import { AriaLabellingProps } from "@/utils/AriaLabellingProps";
 import clsx from "clsx";
 import { useId } from "reka-ui";
 import {
@@ -126,7 +134,6 @@ defineExpose<TextInputExpose>({
       :id="inputID"
       :class="$style.input"
       :name="name"
-      :invalid="invalid"
       :type="type"
       :value="modelValue"
       :placeholder="placeholder"
@@ -141,6 +148,8 @@ defineExpose<TextInputExpose>({
       :spellcheck="spellcheck"
       :enter-key-hint="enterKeyHint"
       :inputmode="inputmode"
+      :data-invalid="invalid || undefined"
+      :aria-invalid="invalid"
       :aria-label="props['aria-label']"
       :aria-labelledby="
         clsx(props['aria-labelledby'], fieldContextValue?.labelledBy.value) ||

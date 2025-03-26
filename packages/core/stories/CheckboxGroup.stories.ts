@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref } from "vue";
-import { Checkbox, CheckboxGroup } from "../src";
+import { Checkbox, CheckboxGroup, CheckboxGroupField } from "../src";
 
 const meta = {
   title: "CheckboxGroup",
@@ -27,5 +27,25 @@ export const Default: Story = {
     <pre>{{ selected }}</pre>
     `,
     components: { CheckboxGroup, Checkbox },
+  }),
+};
+
+export const Field: Story = {
+  render: () => ({
+    setup() {
+      const selected = ref<string[]>([]);
+
+      return {
+        selected,
+      };
+    },
+    template: `<CheckboxGroupField v-model="selected" label="Checkbox Group" description="This is a description" errorMessage="This is an error message">
+      <Checkbox value="1">Option 1</Checkbox>
+      <Checkbox value="2">Option 2</Checkbox>
+      <Checkbox value="3">Option 3</Checkbox>
+    </CheckboxGroupField>
+    <pre>{{ selected }}</pre>
+    `,
+    components: { CheckboxGroupField, Checkbox },
   }),
 };
