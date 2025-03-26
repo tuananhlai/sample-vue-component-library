@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import { CheckboxGroup } from '../src';
+import type { Meta, StoryObj } from "@storybook/vue3";
+import { ref } from "vue";
+import { Checkbox, CheckboxGroup } from "../src";
 
 const meta = {
-  title: 'CheckboxGroup',
+  title: "CheckboxGroup",
   component: CheckboxGroup,
 } satisfies Meta<typeof CheckboxGroup>;
 
@@ -10,14 +11,21 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
-};
-
-export const VisualTest: Story = {
   render: () => ({
-    components: { CheckboxGroup },
-    template: `<div>
+    setup() {
+      const selected = ref<string[]>([]);
 
-    </div>`,
-  })
-}
+      return {
+        selected,
+      };
+    },
+    template: `<CheckboxGroup v-model="selected">
+      <Checkbox value="1">Option 1</Checkbox>
+      <Checkbox value="2">Option 2</Checkbox>
+      <Checkbox value="3">Option 3</Checkbox>
+    </CheckboxGroup>
+    <pre>{{ selected }}</pre>
+    `,
+    components: { CheckboxGroup, Checkbox },
+  }),
+};

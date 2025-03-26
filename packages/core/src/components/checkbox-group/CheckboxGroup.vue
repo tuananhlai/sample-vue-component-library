@@ -29,6 +29,7 @@ export default {};
 </script>
 
 <script lang="ts" setup>
+import clsx from "clsx";
 import {
   CheckboxGroupRoot,
   CheckboxGroupRootEmits,
@@ -53,6 +54,15 @@ const fieldContextValue = useFieldContext();
     :class="$style.root"
     :data-orientation="orientation"
     v-bind="forwarded"
+    :aria-label="props['aria-label']"
+    :aria-labelledby="
+      clsx(props['aria-labelledby'], fieldContextValue?.labelledBy.value) ||
+      undefined
+    "
+    :aria-describedby="
+      clsx(props['aria-describedby'], fieldContextValue?.describedBy.value) ||
+      undefined
+    "
   >
     <slot />
   </CheckboxGroupRoot>

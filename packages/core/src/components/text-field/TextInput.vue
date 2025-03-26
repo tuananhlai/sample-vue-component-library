@@ -143,11 +143,11 @@ defineExpose<TextInputExpose>({
       :inputmode="inputmode"
       :aria-label="props['aria-label']"
       :aria-labelledby="
-        clsx(props['aria-labelledby'], fieldContextValue?.labelledBy) ||
+        clsx(props['aria-labelledby'], fieldContextValue?.labelledBy.value) ||
         undefined
       "
       :aria-describedby="
-        clsx(props['aria-describedby'], fieldContextValue?.describedBy) ||
+        clsx(props['aria-describedby'], fieldContextValue?.describedBy.value) ||
         undefined
       "
       :aria-activedescendant="props['aria-activedescendant']"
