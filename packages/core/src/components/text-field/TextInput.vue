@@ -85,9 +85,9 @@ export interface TextInputExpose {
 </script>
 
 <script setup lang="ts">
+import clsx from "clsx";
 import { useId } from "reka-ui";
 import {
-  computed,
   HTMLAttributes,
   InputHTMLAttributes,
   onMounted,
@@ -112,42 +112,6 @@ onMounted(() => onUnmounted(fieldContextValue?.registerFormControl(inputID)));
 
 const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
 
-const ariaLabelledBy = computed(() => {
-  const labelledBy = [];
-
-  if (props["aria-labelledby"]) {
-    labelledBy.push(props["aria-labelledby"]);
-  }
-
-  if (fieldContextValue?.labelledBy != null) {
-    labelledBy.push(...fieldContextValue.labelledBy.value);
-  }
-
-  if (labelledBy.length === 0) {
-    return undefined;
-  }
-
-  return labelledBy.join(" ");
-});
-
-const ariaDescribedBy = computed(() => {
-  const describedBy = [];
-
-  if (props["aria-describedby"]) {
-    describedBy.push(props["aria-describedby"]);
-  }
-
-  if (fieldContextValue?.describedBy != null) {
-    describedBy.push(...fieldContextValue.describedBy.value);
-  }
-
-  if (describedBy.length === 0) {
-    return undefined;
-  }
-
-  return describedBy.join(" ");
-});
-
 defineExpose<TextInputExpose>({
   get domNode() {
     return inputRef.value;
@@ -160,8 +124,9 @@ defineExpose<TextInputExpose>({
     <input
       ref="inputRef"
       :id="inputID"
-      :invalid="invalid"
       :class="$style.input"
+      :name="name"
+      :invalid="invalid"
       :type="type"
       :value="modelValue"
       :placeholder="placeholder"
@@ -176,8 +141,21 @@ defineExpose<TextInputExpose>({
       :spellcheck="spellcheck"
       :enter-key-hint="enterKeyHint"
       :inputmode="inputmode"
-      :aria-labelledby="ariaLabelledBy"
-      :aria-describedby="ariaDescribedBy"
+      :aria-label="props['aria-label']"
+      :aria-labelledby="
+        clsx(props['aria-labelledby'], fieldContextValue?.labelledBy) ||
+        undefined
+      "
+      :aria-describedby="
+        clsx(props['aria-describedby'], fieldContextValue?.describedBy) ||
+        undefined
+      "
+      :aria-activedescendant="props['aria-activedescendant']"
+      :aria-autocomplete="props['aria-autocomplete']"
+      :aria-haspopup="props['aria-haspopup']"
+      :aria-controls="props['aria-controls']"
+      :aria-details="props['aria-details']"
+      :aria-errormessage="props['aria-errormessage']"
       @input="onInput"
       @blur="(e) => emits('blur', e)"
       @change="(e) => emits('change', e)"

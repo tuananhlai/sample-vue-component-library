@@ -5,6 +5,10 @@ export interface CheckboxGroupProps extends CheckboxGroupRootProps {
    * @default "vertical"
    */
   orientation?: "horizontal" | "vertical";
+
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
 }
 
 export interface CheckboxGroupEmits extends CheckboxGroupRootEmits {}
@@ -29,17 +33,27 @@ import {
   CheckboxGroupRoot,
   CheckboxGroupRootEmits,
   CheckboxGroupRootProps,
+  useForwardPropsEmits,
 } from "reka-ui";
+import { useFieldContext } from "../field/FieldContext";
 
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   orientation: "vertical",
 });
 const emits = defineEmits<CheckboxGroupEmits>();
 const slots = defineSlots<CheckboxGroupSlots>();
+
+const forwarded = useForwardPropsEmits(props, emits);
+
+const fieldContextValue = useFieldContext();
 </script>
 
 <template>
-  <CheckboxGroupRoot :class="$style.root" :data-orientation="orientation">
+  <CheckboxGroupRoot
+    :class="$style.root"
+    :data-orientation="orientation"
+    v-bind="forwarded"
+  >
     <slot />
   </CheckboxGroupRoot>
 </template>
