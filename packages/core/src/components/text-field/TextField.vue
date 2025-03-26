@@ -35,7 +35,7 @@ const props = defineProps<TextFieldProps>();
 const emits = defineEmits<TextFieldEmits>();
 const slots = defineSlots<TextFieldSlots>();
 
-const textInputRef = useTemplateRef<TextInputExpose>("textInputRef");
+const textInputRef = useTemplateRef<TextInputExpose>("text-input-ref");
 const forwarded = useForwardPropsEmits(props, emits);
 
 defineExpose<TextFieldExpose>({
@@ -52,7 +52,7 @@ defineExpose<TextFieldExpose>({
         {{ props.label }}
       </slot>
     </Label>
-    <TextInput ref="textInputRef" v-bind="forwarded" />
+    <TextInput ref="text-input-ref" v-bind="forwarded" />
     <Description v-if="slots.description || props.description">
       <slot name="description">
         {{ props.description }}

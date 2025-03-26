@@ -2,17 +2,17 @@
 import {
   Button,
   Checkbox,
-  Input,
-  type InputExpose,
+  TextField,
+  type TextFieldExpose,
 } from "@tuananhlai/sample-design-system";
 import { ref, useTemplateRef } from "vue";
 
 const isChecked = ref(false);
 
-const inputRef = useTemplateRef<InputExpose>("inputRef");
+const textFieldRef = useTemplateRef<TextFieldExpose>("text-field-ref");
 
 const focus = () => {
-  inputRef.value?.domNode?.focus();
+  textFieldRef.value?.input?.focus();
 };
 </script>
 
@@ -22,7 +22,7 @@ const focus = () => {
     <Button variant="secondary">Click me</Button>
     <Button variant="tertiary">Click me</Button>
     <Checkbox v-model="isChecked">Check me</Checkbox>
-    <Input ref="inputRef" placeholder="Enter your name" />
+    <TextField ref="text-field-ref" label="Enter your name" />
     <Button @click="focus">Focus</Button>
   </div>
 </template>
@@ -31,5 +31,6 @@ const focus = () => {
 .root {
   display: flex;
   gap: var(--bw-space-2);
+  align-items: center;
 }
 </style>

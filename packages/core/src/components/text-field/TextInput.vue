@@ -110,7 +110,7 @@ const inputID = useId(props.id);
 const fieldContextValue = useFieldContext();
 onMounted(() => onUnmounted(fieldContextValue?.registerFormControl(inputID)));
 
-const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
+const inputRef = useTemplateRef<HTMLInputElement>("input-ref");
 
 defineExpose<TextInputExpose>({
   get domNode() {
@@ -122,7 +122,7 @@ defineExpose<TextInputExpose>({
 <template>
   <div :class="$style.root">
     <input
-      ref="inputRef"
+      ref="input-ref"
       :id="inputID"
       :class="$style.input"
       :name="name"

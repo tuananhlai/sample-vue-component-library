@@ -98,13 +98,13 @@ describe("TextField", () => {
     render(
       h({
         setup() {
-          const textFieldRef = useTemplateRef<TextFieldExpose>("textFieldRef");
+          const textFieldRef = useTemplateRef<TextFieldExpose>("text-field-ref");
 
           return {
-            textFieldRef,
+            textFieldRef: textFieldRef,
           };
         },
-        template: `<TextField ref="textFieldRef" />
+        template: `<TextField ref="text-field-ref" />
         <div data-testid="result">{{ textFieldRef?.input }}</div>
         `,
         components: {
