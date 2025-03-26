@@ -9,7 +9,6 @@ export interface CheckboxSlots {
 </script>
 
 <script setup lang="ts">
-import { CheckIcon } from "lucide-vue-next";
 import {
   CheckboxIndicator,
   CheckboxRoot,
@@ -30,7 +29,17 @@ const forwardedPropEmits = useForwardPropsEmits(props, emits);
   <Label :class="$style.root" :data-disabled="disabled || undefined">
     <CheckboxRoot :class="$style.checkboxRoot" v-bind="forwardedPropEmits">
       <CheckboxIndicator :class="$style.checkboxIndicator">
-        <CheckIcon :class="$style.checkedIcon" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          :class="$style.checkedIcon"
+        >
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
       </CheckboxIndicator>
     </CheckboxRoot>
     <slot />
