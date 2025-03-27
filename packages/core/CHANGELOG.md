@@ -1,5 +1,12 @@
 # @tuananhlai/sample-design-system
 
+## 0.0.5
+
+### Patch Changes
+
+- 3f05d50: chore: remove `lucide-vue-next` as an dependencies.
+- eaf9005: feat/checkbox-group: initialize
+
 ## 0.0.4
 
 ### Patch Changes
